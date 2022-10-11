@@ -89,6 +89,16 @@ class SelectableController extends ChangeNotifier {
     return false;
   }
 
+  /// Attempts to select all words
+  bool selectAll({int? key}) {
+    if (_selections.cachedParagraphs.list.isEmpty) return false;
+    // We need to calculate last index
+    final lastParagraph = _selections.cachedParagraphs.list.last;
+
+    return selectWordsBetweenIndexes(
+        0, lastParagraph.firstCharIndex + lastParagraph.text.length - 1);
+  }
+
   /// Attempts to select the word at [index], returning `true` if successful.
   bool selectWordAtIndex(int index, {int? key}) =>
       selectWordsBetweenIndexes(index, index, key: key);
