@@ -202,10 +202,15 @@ class SelectableController extends ChangeNotifier {
   /// Returns a String containing the combined text of all render paragraphs
   /// contained in the Selectable. This can be used with `selectWordAtIndex`
   /// and `selectWordsBetweenIndexes` to select a word or words.
-  String getContainedText() {
+  /// [isEnableNewLine] When user need to copy with paragraph set to true
+  String getContainedText({bool isEnableNewLine = false}) {
     final buff = StringBuffer();
     for (final paragraph in _selections.cachedParagraphs.list) {
-      buff.write(paragraph.text);
+      if (isEnableNewLine) {
+        buff.writeln(paragraph.text);
+      } else {
+        buff.write(paragraph);
+      }
     }
     return buff.toString();
   }
