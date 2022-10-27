@@ -268,6 +268,30 @@ class SelectableController extends ChangeNotifier {
     }
   }
 
+  int getTextLength({int? key}) {
+    if (_selections.cachedParagraphs.list.isEmpty) return 0;
+    // We need to calculate last index
+    final lastParagraph = _selections.cachedParagraphs.list.last;
+    return lastParagraph.firstCharIndex + lastParagraph.text.length - 1;
+  }
+
+  int getParagraphLength({int? key}) {
+    if (_selections.cachedParagraphs.list.isEmpty) return 0;
+    // We need to calculate last index
+    return _selections.cachedParagraphs.list.length;
+  }
+
+  List<SelectionParagraph> getParagraphBetweeenIndexes(int start, int end,
+      {int? key}) {
+    if (_selections.cachedParagraphs.list.isEmpty) return [];
+    return _selections.cachedParagraphs.list.sublist(start, end);
+  }
+
+  List<SelectionParagraph> getParagraphs({int? key}) {
+    if (_selections.cachedParagraphs.list.isEmpty) return [];
+    return _selections.cachedParagraphs.list;
+  }
+
   /// Returns the selection painter, or null if none.
   SelectionPainter? getCustomPainter({int? key}) => _painters[key ?? 0];
 
