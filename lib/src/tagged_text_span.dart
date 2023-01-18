@@ -99,7 +99,10 @@ class TaggedTextSpan extends TextSpan with SplittableMixin<InlineSpan> {
   //
 
   @override
-  List<InlineSpan> splitAtIndex(SplitAtIndex index) {
+  List<InlineSpan> splitAtIndex(
+    SplitAtIndex index, {
+    bool ignoreFloatedWidgetSpans = false,
+  }) {
     final initialIndex = index.value;
     final result = _splitAt(index);
 
